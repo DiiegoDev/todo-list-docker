@@ -1,4 +1,11 @@
+export interface Todo {
+    id: string;
+    title: string;
+    content: string;
+    isCompleted: boolean;
+}
 export declare class TodoRepository {
     private todos;
-    findAll(): any[];
+    createTodo(todo: Todo): void;
+    findAll(): Todo[];
 }

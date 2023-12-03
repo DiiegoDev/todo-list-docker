@@ -17,7 +17,7 @@ let AppController = class AppController {
         this.appService = appService;
     }
     findAll() {
-        return this.appService.getHello();
+        return this.appService.findAll();
     }
 };
 exports.AppController = AppController;
@@ -25,7 +25,7 @@ __decorate([
     (0, common_1.Get)("list-all"),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", String)
+    __metadata("design:returntype", void 0)
 ], AppController.prototype, "findAll", null);
 exports.AppController = AppController = __decorate([
     (0, common_1.Controller)(),

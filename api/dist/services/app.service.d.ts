@@ -1,3 +1,6 @@
+import { TodoRepository } from 'src/repositories/todo-repository';
 export declare class AppService {
-    getHello(): string;
+    private readonly todoRepository;
+    constructor(todoRepository: TodoRepository);
+    findAll(): import("src/repositories/todo-repository").Todo[];
 }
