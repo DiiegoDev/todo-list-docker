@@ -16,6 +16,5 @@ export class AppService {
     const data = {id, ...todo};
 
     this.todoRepository.createTodo(data);
-
   }
 }
