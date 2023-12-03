@@ -19,4 +19,12 @@ export class TodoRepository {
     return this.todos;
   }
 
+  updateTodo(id: string, isCompleted: boolean) {
+    const todoIndex = this.todos.findIndex(todo => todo.id === id);
+
+    if(todoIndex !== -1) {
+      this.todos[todoIndex].isCompleted = isCompleted
+    }
+  }
+
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { AppService } from '../services/app.service';
 
 @Controller()
@@ -10,8 +10,9 @@ export class AppController {
     return this.appService.findAll();
   }
 
-  @Post()
+  @Post('create')
   create(@Body() todo: TodoDto) {
     this.appService.createTodo(todo);
   }
+
 }

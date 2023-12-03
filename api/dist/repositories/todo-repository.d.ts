@@ -8,4 +8,5 @@ export declare class TodoRepository {
     private todos;
     createTodo(todo: Todo): void;
     findAll(): Todo[];
+    updateTodo(id: string, isCompleted: boolean): void;
 }

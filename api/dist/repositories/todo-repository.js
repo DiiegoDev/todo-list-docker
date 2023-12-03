@@ -18,6 +18,12 @@ let TodoRepository = class TodoRepository {
     findAll() {
         return this.todos;
     }
+    updateTodo(id, isCompleted) {
+        const todoIndex = this.todos.findIndex(todo => todo.id === id);
+        if (todoIndex !== -1) {
+            this.todos[todoIndex].isCompleted = isCompleted;
+        }
+    }
 };
 exports.TodoRepository = TodoRepository;
 exports.TodoRepository = TodoRepository = __decorate([
