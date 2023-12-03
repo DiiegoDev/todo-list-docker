@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppService = void 0;
+const node_crypto_1 = require("node:crypto");
 const common_1 = require("@nestjs/common");
 const todo_repository_1 = require("../repositories/todo-repository");
 let AppService = class AppService {
@@ -18,6 +19,11 @@ let AppService = class AppService {
     }
     findAll() {
         return this.todoRepository.findAll();
+    }
+    createTodo(todo) {
+        const id = (0, node_crypto_1.randomUUID)();
+        const data = { id, ...todo };
+        this.todoRepository.createTodo(data);
     }
 };
 exports.AppService = AppService;
