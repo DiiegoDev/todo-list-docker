@@ -25,6 +25,10 @@ let AppController = class AppController {
     create(todo) {
         this.appService.createTodo(todo);
     }
+    update(body, id) {
+        const { isCompleted } = body;
+        this.appService.updateTodo(id, isCompleted);
+    }
 };
 exports.AppController = AppController;
 __decorate([
@@ -40,6 +44,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], AppController.prototype, "create", null);
+__decorate([
+    (0, common_1.Patch)('update/:id'),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:returntype", void 0)
+], AppController.prototype, "update", null);
 exports.AppController = AppController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [app_service_1.AppService])

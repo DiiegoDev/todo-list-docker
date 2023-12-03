@@ -15,4 +15,9 @@ export class AppController {
     this.appService.createTodo(todo);
   }
 
+  @Patch('update/:id')
+  update(@Body() body: {isCompleted: boolean}, @Param('id') id: string) {
+    const {isCompleted} = body;
+    this.appService.updateTodo(id, isCompleted);
+  }
 }
