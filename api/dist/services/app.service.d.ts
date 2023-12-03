@@ -4,4 +4,5 @@ export declare class AppService {
     constructor(todoRepository: TodoRepository);
     findAll(): import("src/repositories/todo-repository").Todo[];
     createTodo(todo: TodoDto): void;
+    updateTodo(id: string, isCompleted: boolean): void;
 }

@@ -17,4 +17,8 @@ export class AppService {
 
     this.todoRepository.createTodo(data);
   }
+
+  updateTodo(id: string, isCompleted: boolean) {
+    this.todoRepository.updateTodo(id, isCompleted)
+  }
 }

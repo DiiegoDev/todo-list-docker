@@ -25,6 +25,9 @@ let AppService = class AppService {
         const data = { id, ...todo };
         this.todoRepository.createTodo(data);
     }
+    updateTodo(id, isCompleted) {
+        this.todoRepository.updateTodo(id, isCompleted);
+    }
 };
 exports.AppService = AppService;
 exports.AppService = AppService = __decorate([
