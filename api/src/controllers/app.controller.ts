@@ -9,4 +9,9 @@ export class AppController {
   findAll() {
     return this.appService.findAll();
   }
+
+  @Post()
+  create(@Body() todo: TodoDto) {
+    this.appService.createTodo(todo);
+  }
 }
