@@ -16,17 +16,17 @@ let AppController = class AppController {
     constructor(appService) {
         this.appService = appService;
     }
-    getHello() {
+    findAll() {
         return this.appService.getHello();
     }
 };
 exports.AppController = AppController;
 __decorate([
-    (0, common_1.Get)(),
+    (0, common_1.Get)("list-all"),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", String)
-], AppController.prototype, "getHello", null);
+], AppController.prototype, "findAll", null);
 exports.AppController = AppController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [app_service_1.AppService])
