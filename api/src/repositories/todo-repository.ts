@@ -27,4 +27,10 @@ export class TodoRepository {
     }
   }
 
+
+  deleteTodo(id: string) {
+    const newTodoArray = this.todos.filter(todo => todo.id !== id);
+
+    this.todos = newTodoArray;
+  }
 }

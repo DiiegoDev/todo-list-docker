@@ -9,4 +9,5 @@ export declare class TodoRepository {
     createTodo(todo: Todo): void;
     findAll(): Todo[];
     updateTodo(id: string, isCompleted: boolean): void;
+    deleteTodo(id: string): void;
 }

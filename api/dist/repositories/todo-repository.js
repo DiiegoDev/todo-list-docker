@@ -24,6 +24,10 @@ let TodoRepository = class TodoRepository {
             this.todos[todoIndex].isCompleted = isCompleted;
         }
     }
+    deleteTodo(id) {
+        const newTodoArray = this.todos.filter(todo => todo.id !== id);
+        this.todos = newTodoArray;
+    }
 };
 exports.TodoRepository = TodoRepository;
 exports.TodoRepository = TodoRepository = __decorate([
