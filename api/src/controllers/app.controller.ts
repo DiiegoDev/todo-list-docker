@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { AppService } from '../services/app.service';
 
 @Controller()
@@ -19,5 +19,10 @@ export class AppController {
   update(@Body() body: {isCompleted: boolean}, @Param('id') id: string) {
     const {isCompleted} = body;
     this.appService.updateTodo(id, isCompleted);
+  }
+
+  @Delete('delete/:id')
+  delete(@Param('id') id: string) {
+   this.appService.deleteTodo(id);
   }
 }

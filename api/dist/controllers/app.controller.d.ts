@@ -7,4 +7,5 @@ export declare class AppController {
     update(body: {
         isCompleted: boolean;
     }, id: string): void;
+    delete(id: string): void;
 }
