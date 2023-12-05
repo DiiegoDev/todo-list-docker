@@ -21,4 +21,8 @@ export class AppService {
   updateTodo(id: string, isCompleted: boolean) {
     this.todoRepository.updateTodo(id, isCompleted)
   }
+
+  deleteTodo(id: string) {
+    this.todoRepository.deleteTodo(id);
+  }
 }
