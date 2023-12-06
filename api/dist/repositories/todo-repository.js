@@ -5,32 +5,33 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TodoRepository = void 0;
 const common_1 = require("@nestjs/common");
+const prisma_service_1 = require("../prisma.service");
 let TodoRepository = class TodoRepository {
-    constructor() {
-        this.todos = [];
+    constructor(prisma) {
+        this.prisma = prisma;
     }
-    createTodo(todo) {
-        this.todos.push(todo);
+    async createTodo(todo) {
+        await this.prisma.todo.create({ data: todo });
     }
-    findAll() {
-        return this.todos;
+    async findAll() {
+        return await this.prisma.todo.findMany();
     }
-    updateTodo(id, isCompleted) {
-        const todoIndex = this.todos.findIndex(todo => todo.id === id);
-        if (todoIndex !== -1) {
-            this.todos[todoIndex].isCompleted = isCompleted;
-        }
+    async updateTodo(id, isCompleted) {
+        await this.prisma.todo.update({ data: { isCompleted }, where: { id } });
     }
-    deleteTodo(id) {
-        const newTodoArray = this.todos.filter(todo => todo.id !== id);
-        this.todos = newTodoArray;
+    async deleteTodo(id) {
+        await this.prisma.todo.delete({ where: { id } });
     }
 };
 exports.TodoRepository = TodoRepository;
 exports.TodoRepository = TodoRepository = __decorate([
-    (0, common_1.Injectable)()
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
 ], TodoRepository);
 //# sourceMappingURL=todo-repository.js.map

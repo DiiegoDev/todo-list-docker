@@ -1,36 +1,32 @@
 import { Injectable } from "@nestjs/common";
+import {PrismaService} from '../prisma.service';
+import { TodoDto } from "src/dto/todo-dto";
 
 export interface Todo {
   id: string;
   title: string;
-  content: string;
   isCompleted: boolean;
 }
 
 @Injectable()
 export class TodoRepository {
-  private todos: Todo[] = [];
+  
+  constructor(private readonly prisma: PrismaService) {}
 
-  createTodo(todo: Todo) {
-    this.todos.push(todo);
+  async createTodo(todo: TodoDto) {
+    await this.prisma.todo.create({data: todo});
   }
 
-  findAll(): Todo[] {
-    return this.todos;
+  async findAll(): Promise<Todo[]> {
+    return await this.prisma.todo.findMany();
   }
 
-  updateTodo(id: string, isCompleted: boolean) {
-    const todoIndex = this.todos.findIndex(todo => todo.id === id);
-
-    if(todoIndex !== -1) {
-      this.todos[todoIndex].isCompleted = isCompleted
-    }
+  async updateTodo(id: string, isCompleted: boolean) {
+   await this.prisma.todo.update({data: {isCompleted}, where: {id}})
   }
 
 
-  deleteTodo(id: string) {
-    const newTodoArray = this.todos.filter(todo => todo.id !== id);
-
-    this.todos = newTodoArray;
+  async deleteTodo(id: string) {
+    await this.prisma.todo.delete({where: {id}})
   }
 }

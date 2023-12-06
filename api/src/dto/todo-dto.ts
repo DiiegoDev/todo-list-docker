@@ -1,5 +1,4 @@
-interface TodoDto {
+export interface TodoDto {
   title: string;
-  content: string;
   isCompleted: boolean;
 }

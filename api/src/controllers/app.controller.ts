@@ -1,13 +1,14 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { AppService } from '../services/app.service';
+import { TodoDto } from 'src/dto/todo-dto';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get("list-all")
-  findAll() {
-    return this.appService.findAll();
+  async findAll() {
+    return await this.appService.findAll();
   }
 
   @Post('create')

@@ -19,8 +19,8 @@ let AppController = class AppController {
     constructor(appService) {
         this.appService = appService;
     }
-    findAll() {
-        return this.appService.findAll();
+    async findAll() {
+        return await this.appService.findAll();
     }
     create(todo) {
         this.appService.createTodo(todo);
@@ -38,7 +38,7 @@ __decorate([
     (0, common_1.Get)("list-all"),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], AppController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Post)('create'),

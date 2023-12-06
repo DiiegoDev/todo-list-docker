@@ -17,8 +17,8 @@ let AppService = class AppService {
     constructor(todoRepository) {
         this.todoRepository = todoRepository;
     }
-    findAll() {
-        return this.todoRepository.findAll();
+    async findAll() {
+        return await this.todoRepository.findAll();
     }
     createTodo(todo) {
         const id = (0, node_crypto_1.randomUUID)();

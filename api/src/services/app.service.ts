@@ -1,14 +1,15 @@
 import {randomUUID} from 'node:crypto'
 import { Injectable } from '@nestjs/common';
 import { TodoRepository } from 'src/repositories/todo-repository';
+import { TodoDto } from 'src/dto/todo-dto';
 
 @Injectable()
 export class AppService {
   constructor(private readonly todoRepository: TodoRepository) {}
 
 
-  findAll() {
-    return this.todoRepository.findAll();
+  async findAll() {
+    return await this.todoRepository.findAll();
   }
 
   createTodo(todo: TodoDto) {
