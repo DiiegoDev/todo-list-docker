@@ -1,8 +1,7 @@
 import { createTodo } from "@/api/createTodo";
-import { QueryClient, useMutation } from "@tanstack/react-query";
+import { queryClient } from "@/reactQueryProvider";
+import { useMutation } from "@tanstack/react-query";
 import { ChangeEvent, FormEvent, useState } from "react";
-
-const queryClient = new QueryClient();
 
 export function FormComponent() {
 
@@ -12,17 +11,19 @@ export function FormComponent() {
 
   const { mutateAsync, isPending } = useMutation({
     mutationFn: (title: string) => createTodo(title),
-    onSuccess: () => queryClient.invalidateQueries({queryKey: ["todos"]})
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: ["todos"]})
+    }
   });
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    mutateAsync(title);
+    await mutateAsync(title);
     setTitle('');
   };
 
   return (
-    <form onSubmit={ handleSubmit } className="flex gap-4">
+    <form onSubmit={handleSubmit} className="flex gap-4">
       <input 
       onChange={handleChange}
       value={title} 

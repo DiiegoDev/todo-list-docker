@@ -5,12 +5,7 @@ export async function createTodo(title: string) {
     method: "POST",
     headers: {
       'Content-Type': 'application/json',
-      // Outros headers, se necessário
     },
     body: JSON.stringify({ title })
   });
-
-  // if(!response.ok) throw new Error("Erro ao criar tarefa.");
-
-  // return response.json();
 }

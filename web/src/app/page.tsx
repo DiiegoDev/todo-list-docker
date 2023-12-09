@@ -13,7 +13,7 @@ export default function Home() {
   
 
   const { isPending, error, data } = useQuery({
-    queryKey: ['todos'],
+    queryKey: ["todos"],
     queryFn: fetchTodos
   })
 
