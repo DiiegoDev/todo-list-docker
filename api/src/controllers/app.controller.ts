@@ -13,6 +13,7 @@ export class AppController {
 
   @Post('create')
   create(@Body() todo: TodoDto) {
+    console.log(todo);
     this.appService.createTodo(todo);
   }
 

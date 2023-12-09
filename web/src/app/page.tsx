@@ -26,20 +26,18 @@ export default function Home() {
     <main className="flex flex-col gap-8 items-center py-14">
       <FormComponent />
 
-      <div className='min-w-[333px]'>
-        <div className='flex flex-col gap-4'>
+      <div className='min-w-[333px] flex flex-col gap-4'>
+       
          {data?.map((todo) => {
           return (
             <TodoComponent
-              key={todo.id} 
-              id={todo.id} 
-              title={todo.title} 
-              isCompleted={todo.isCompleted}
+              key={todo.id}
+              todo={todo}
             />
           )
          })}
         </div>
-      </div>
+    
     </main>
    
   )

@@ -23,6 +23,7 @@ let AppController = class AppController {
         return await this.appService.findAll();
     }
     create(todo) {
+        console.log(todo);
         this.appService.createTodo(todo);
     }
     update(body, id) {
