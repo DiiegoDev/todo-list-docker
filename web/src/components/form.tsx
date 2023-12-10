@@ -1,25 +1,18 @@
-import { createTodo } from "@/api/createTodo";
-import { queryClient } from "@/reactQueryProvider";
-import { useMutation } from "@tanstack/react-query";
+import { useCreateTodo } from "@/hooks/useCreateTodo";
 import { ChangeEvent, FormEvent, useState } from "react";
 
 export function FormComponent() {
 
   const [title, setTitle] = useState<string>("");
 
+  const { mutateAsync } = useCreateTodo();
+  
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value);
-
-  const { mutateAsync, isPending } = useMutation({
-    mutationFn: (title: string) => createTodo(title),
-    onSuccess: () => {
-      queryClient.invalidateQueries({queryKey: ["todos"]})
-    }
-  });
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await mutateAsync(title);
-    setTitle('');
+    mutateAsync(title);
+    setTitle("");
   };
 
   return (
@@ -33,7 +26,7 @@ export function FormComponent() {
       id="title" 
       required
       />
-      <button type="submit" >adicionar</button>
+      <button type="submit">adicionar</button>
     </form>
   )
 }

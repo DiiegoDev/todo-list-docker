@@ -2,20 +2,11 @@
 
 import {  FormComponent } from '@/components/form';
 import { TodoComponent } from '@/components/todo';
-import { Todo } from '@/interfaces/todo';
-import { useQuery } from '@tanstack/react-query';
+import { useGetTodos } from '@/hooks/useGetTodos';
 
 export default function Home() {
 
-  const fetchTodos = (): Promise<Todo[]> => 
-    fetch('http://localhost:8080/list-all').then(
-        (res) => res.json())
-  
-
-  const { isPending, error, data } = useQuery({
-    queryKey: ["todos"],
-    queryFn: fetchTodos
-  })
+  const { data, isPending, isError } = useGetTodos();
 
   if(isPending) {
     return <p>loading...</p>

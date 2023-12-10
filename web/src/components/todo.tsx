@@ -1,9 +1,6 @@
 import { Todo } from "@/interfaces/todo";
-import { useState } from "react";
-import { QueryClient, useMutation } from "@tanstack/react-query"
-import { updateTodo } from "@/api/updateTodo";
-import { UpdateTodoProps } from "@/interfaces/updateTodo";
-import { queryClient } from "@/reactQueryProvider";
+import { useUpdateTodo } from "@/hooks/useUpdateTodo";
+import { useDeleteTodo } from "@/hooks/useDeleteTodo";
 
 interface TodoProps {
   todo: Todo
@@ -11,19 +8,17 @@ interface TodoProps {
 
 export function TodoComponent({ todo }: TodoProps) {
 
-  const [selectedTodo, setSelectedTodo] = useState<Todo>();
+  const { mutateAsyncUpdate } = useUpdateTodo();
+  const { mutateAsyncDelete } = useDeleteTodo();
 
-  const { mutateAsync } = useMutation({
-    mutationFn: (data: UpdateTodoProps) => updateTodo(data),
-    onSuccess: () => queryClient.invalidateQueries({queryKey: ["todos"]})
-  });
-
-  const handleClick = () => {
-    setSelectedTodo(todo);
+  const handleClickUpdate = () => {
     const isCompleted = todo.isCompleted ? false : true;
     const id = todo.id;
-    console.log(id, isCompleted);
-    mutateAsync({ isCompleted, id });
+    mutateAsyncUpdate({ isCompleted, id });
+  }
+
+  const handleClickDelete = () => {
+    mutateAsyncDelete(todo.id);
   }
 
   return (
@@ -31,8 +26,8 @@ export function TodoComponent({ todo }: TodoProps) {
       <p className={`${todo.isCompleted ? "line-through" : ""}`}>{todo.title}</p>
 
       <div className='flex gap-4'>
-        <button className='text-green-300' onClick={handleClick}>feito</button>
-        <button className='text-red-300'>excluir</button>
+        <button className='text-green-300' onClick={handleClickUpdate}>feito</button>
+        <button className='text-red-300' onClick={handleClickDelete}>excluir</button>
       </div>
     </div>
   )
