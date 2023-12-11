@@ -1,5 +1,6 @@
 import { useCreateTodo } from "@/hooks/useCreateTodo";
 import { ChangeEvent, FormEvent, useState } from "react";
+import { Plus } from "lucide-react";
 
 export function FormComponent() {
 
@@ -16,17 +17,19 @@ export function FormComponent() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-4">
+    <form onSubmit={handleSubmit} className="flex gap-3">
       <input 
       onChange={handleChange}
       value={title} 
-      className="bg-transparent border border-gray-200 rounded-md px-3 py-1" 
+      className="bg-transparent border border-gray-200 rounded-md px-3 py-2" 
       type="text" 
       name="title" 
       id="title" 
       required
       />
-      <button type="submit">adicionar</button>
+      <button className="p-2 rounded bg-blue-300 hover:bg-blue-400 transition" type="submit">
+        <Plus color="black"/>
+      </button>
     </form>
   )
 }
