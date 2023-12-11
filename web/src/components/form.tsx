@@ -17,7 +17,7 @@ export function FormComponent() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex gap-3">
+    <form onSubmit={handleSubmit} className="flex gap-2">
       <input 
       onChange={handleChange}
       value={title} 
