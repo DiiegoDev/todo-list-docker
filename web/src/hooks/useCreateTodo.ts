@@ -1,5 +1,5 @@
 import { api } from "@/api";
-import { queryClient } from "@/reactQueryProvider";
+import { queryClient } from "@/providers/reactQueryProvider";
 import { useMutation } from "@tanstack/react-query";
 
 async function createTodo(title: string) {
@@ -11,10 +11,10 @@ async function createTodo(title: string) {
 }
 
 export function useCreateTodo() {
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: (title: string) => createTodo(title),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["todos"] })
   });
 
-  return { mutateAsync };
+  return { mutateAsync, isPending };
 }

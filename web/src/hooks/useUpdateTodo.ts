@@ -1,6 +1,6 @@
 import { api } from "@/api";
 import { UpdateTodoProps } from "@/interfaces/updateTodo";
-import { queryClient } from "@/reactQueryProvider";
+import { queryClient } from "@/providers/reactQueryProvider";
 import { useMutation } from "@tanstack/react-query";
 
 async function updateTodo(data: UpdateTodoProps) {
@@ -13,11 +13,13 @@ async function updateTodo(data: UpdateTodoProps) {
 }
 
 export function useUpdateTodo() {
-  const { mutateAsync } = useMutation({
+  const { mutateAsync, isPending } = useMutation({
     mutationFn: (data: UpdateTodoProps) => updateTodo(data),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["todos"] })
   });
 
   const mutateAsyncUpdate = mutateAsync;
-  return { mutateAsyncUpdate };
+  const isPendingUpdate = isPending;
+
+  return { mutateAsyncUpdate, isPendingUpdate };
 }
